@@ -34,6 +34,7 @@ function Board(props) {
     const getBoardList = () => {
         axios.get(`${API_BASE_URL}/api/task/todo`).then((res) => {
             console.log(res);
+            setisLoading(false)
         }).catch((err) => {
             console.log(err);
         })
@@ -90,21 +91,22 @@ function Board(props) {
                             <MC.TableCell align={"center"}>TITLE</MC.TableCell>
                             <MC.TableCell align={"center"}>COMPLETED</MC.TableCell>
                             <MC.TableCell align={"center"}>CREATED_BY</MC.TableCell>
+                            <MC.TableCell align={"center"}>ACTION</MC.TableCell>
                         </MC.TableRow>
                     </MC.TableHead>
                     <MC.TableBody>
                         {
                             isLoading ?
                                 <MC.TableRow hover>
-                                    <MC.TableCell colSpan={4} align="center">
+                                    <MC.TableCell colSpan={5} align="center">
                                         <MC.CircularProgress />
                                     </MC.TableCell>
                                 </MC.TableRow>
                                 :
                                 boardList.length === 0 ?
                                     <MC.TableRow>
-                                        <MC.TableCell colSpan={4} align="center">
-                                            조회된 이사예약 데이터가 한 건도 없네요.
+                                        <MC.TableCell colSpan={5} align="center">
+                                            조회된 데이터가 한 건도 없네요.
                                         </MC.TableCell>
                                     </MC.TableRow>
                                     :
