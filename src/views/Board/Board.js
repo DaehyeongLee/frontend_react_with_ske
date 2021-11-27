@@ -101,13 +101,24 @@ function Board(props) {
     // 등록 버튼 Click Event
     const clickAdd = () => {
         setisAdd(true)
-        setEditId(boardList[boardList.length-1].id + 1)
-        setboardList([...boardList, {
-            id: boardList[boardList.length-1].id + 1,
-            title: "",
-            completed: false,
-            created_by: ""
-        }])
+        if (boardList.length > 0) {
+            setEditId(boardList[boardList.length-1].id + 1)
+            setboardList([...boardList, {
+                id: boardList[boardList.length-1].id + 1,
+                title: "",
+                completed: false,
+                created_by: ""
+            }])
+        }
+        else {
+            setEditId(1)
+            setboardList([...boardList, {
+                id: 1,
+                title: "",
+                completed: false,
+                created_by: ""
+            }])
+        }
     }
 
     // 취소 버튼 Click Event
