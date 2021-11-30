@@ -1,17 +1,28 @@
 version: "3.7"
 
 services:
-  sample:
-    container_name: react-dockerize
+  nginx:
+    restart: always
+    container_name: nginx
     build:
-      context: .
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "3000:81"
+    networks:
+      - frontend
+    
+  client:
+    container_name: client
+    build:
+      context: ./client
       dockerfile: Dockerfile
     volumes:
-      - ".:/app"
+      - "./client/:/app"
       - "/app/node_modules"
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=development
-    stdin_open: true
-    tty: true
+    networks:
+      - frontend
+
+networks: 
+  frontend:
+    driver: bridge
